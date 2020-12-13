@@ -15,7 +15,7 @@
             
               <b-form-input
                 id="input-1"
-                v-model="update[0].name"
+                :value="update[0].name"
                 required
                 placeholder="لطفا نام نرم افزار را وارد کنید" >
                </b-form-input>
@@ -24,7 +24,7 @@
               <b-form-group id="input-group-2" label="عنوان  " label-for="input-2">
               <b-form-input
                id="input-2"
-               v-model="update[0].title"
+               :value="update[0].title"
                required
                placeholder="لطفا عنوان نرم افزار را وارد کنید" >
                </b-form-input>
@@ -35,7 +35,7 @@
               <b-datepicker 
               id="datepicker-placeholder"
               placeholder="انتخاب یک تاریخ"
-              locale="fa"   v-model="update[0].date">
+              locale="fa"   :value="update[0].date">
               </b-datepicker>
               </b-form-group>
             </b-col>
@@ -44,7 +44,7 @@
               <b-form-group id="input-group-2" label="آدرس اینترنتی" label-for="input-2">
               <b-form-input
                 id="input-2"
-                v-model="update[0].url"
+                :value="update[0].url"
                 required
                 placeholder="لطفا آدرس اینترنتی نرم افزار را وارد کنید" >
                 </b-form-input>
@@ -52,7 +52,7 @@
      
               <b-form-group  label="عمومی" >
               <b-radio-group
-              v-model="update[0].public"
+              :value="update[0].public"
               :options="public"
                class="mb-3"
               value-field="item"
@@ -64,7 +64,7 @@
                
              <b-form-group  label="وضعیت" >
              <b-radio-group
-             v-model="update[0].status"
+             :value="update[0].status"
              :options="status"
              class="mb-3"
              value-field="item"

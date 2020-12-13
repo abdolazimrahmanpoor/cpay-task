@@ -2,6 +2,7 @@ import Vue from 'vue'
 export const state = () => ({
   search: [],
   update: [],
+  select: '',
   items: [
     {
       id: "2cmnz7qg",
@@ -24,10 +25,15 @@ export const state = () => ({
   ]
 });
 
+
+
+
 export const mutations = {
   ADD_ITEM(state, value) {
     state.items.push(value)
   },
+
+
 
 
 
@@ -36,9 +42,27 @@ export const mutations = {
   },
 
 
+
+
+
+
+
   GET_UPDATE_ITEM(state, value) {
     state.update = state.items.filter(item => item.id === value);
   },
+
+  SELECT_ITEM(state, value) {
+    state.select = state.items.filter(item => item.id === value);
+  },
+   
+  CHANGE_STATUS(state) {
+    state.items.forEach(item => {
+         if (item.id === state.select[0].id) {
+         item.status = !item.status
+         }
+       });
+  },
+ 
 
   SET_UPDATE_ITEM(state, value){
      Vue.set(state.items, value.id, value);
@@ -54,7 +78,13 @@ export const mutations = {
 };
 
 
-
+export const actions = {
+  setStatus ({ commit }, value ) {
+    console.log('select');
+      commit('SELECT_ITEM', value),
+      commit('CHANGE_STATUS')
+  }
+}
 
 export const getters = {
   getActive: state => {

@@ -30,7 +30,7 @@
                  </div>
                  </td>
 
-               <td><toggle-button v-model="product.status"/></td>
+               <td><toggle-button :value="product.status" @change="changeStatus(product.id)"/></td>
              </tr>
            </tbody>
          </table>  
@@ -46,6 +46,8 @@ export default {
   data() {
     return {
       confirmRemove: "",
+      product: [],
+      inceremenyBy:1
     };
   },
   methods: {
@@ -74,13 +76,19 @@ export default {
           // An error occurred
         });
     },
+    changeStatus(id) {
+      console.log("dispatch");
+      this.$store.dispatch("product/setStatus", id);
+    },
     editPage(id){
        this.$store.commit("product/GET_UPDATE_ITEM", id);
        this.$router.push("/edit");
     }
   },
   computed: {
+
     ...mapGetters("product", ["getActive"]),
+ 
   },
 };
 </script>

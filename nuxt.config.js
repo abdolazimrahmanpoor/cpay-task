@@ -13,6 +13,7 @@ export default {
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+     
     ]
   },
 
@@ -26,7 +27,8 @@ export default {
   // Plugins to run before rendering page (https://go.nuxtjs.dev/config-plugins)
   plugins: [
     {src: '~/plugins/fontawesome.js'},
-    { src: '~plugins/vue-js-toggle-button', mode: 'client' }
+    { src: '~plugins/vue-js-toggle-button', mode: 'client' },
+    {src: '~/plugins/vee-validate'}
 
     
     
@@ -54,5 +56,6 @@ export default {
 
   // Build Configuration (https://go.nuxtjs.dev/config-build)
   build: {
+    transpile: ["vee-validate/dist/rules"]
   }
 }

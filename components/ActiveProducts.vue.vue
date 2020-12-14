@@ -81,7 +81,7 @@ export default {
       this.$store.dispatch("product/setStatus", id);
     },
     editPage(id){
-       this.$store.commit("product/GET_UPDATE_ITEM", id);
+       this.$store.commit("product/SELECT_ITEM", id);
        this.$router.push("/edit");
     }
   },

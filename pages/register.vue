@@ -1,123 +1,137 @@
+
 <template>
     <div>
        <b-container >
+
           <p class="d-inline-block my-3 title2"> مدیریت سیستم | ثبت نرم افزار</p>
             <div class="content">
-              <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-                <b-row>
-                 <b-col md="6">
+                
+                
+                <ValidationObserver v-slot="{ handleSubmit }">
+                <b-form @submit.prevent="handleSubmit(onSubmit)">
 
-                   <b-form-group
-                     label="نام">
-                     <b-form-input  v-model="product.name" required placeholder="لطفا نام نرم افزار را وارد کنید"></b-form-input>
-                    </b-form-group>
+                 <b-row>
+                   <b-col md="6">
+                    <ValidationProvider name="Name" rules="required|alpha" v-slot="{ errors }"> 
+                       <b-form-group label="نام" label-for="name">
+                       <b-form-input type="text" v-model="formData.name" id="name"></b-form-input>
+                       <span style="color: red">{{ errors[0] }}</span>
+                   </b-form-group>
+                    </ValidationProvider>
+                 </b-col>
 
-     
-                     <b-form-group id="input-group-2" label="عنوان  " label-for="input-2">
-                     <b-form-input
-                     v-model="product.title"
-                     required
-                     placeholder="لطفا عنوان نرم افزار را وارد کنید">
-                     </b-form-input>
-                     </b-form-group>
-      
- 
-                     <b-form-group 
-                     label="تاریخ"
-                     label-for="input-2">
-                     <b-datepicker 
-                     id="datepicker-placeholder"
-                     placeholder="انتخاب یک تاریخ"
-                     locale="fa"   v-model="product.date">
-                     </b-datepicker>
-                     </b-form-group>   
-                </b-col>
+                   <b-col md="6">
+                    <ValidationProvider name="Title" rules="required|alpha" v-slot="{ errors }"> 
+                       <b-form-group label="عنوان" label-for="Title">
+                       <b-form-input type="text" v-model="formData.title" id="title"></b-form-input>
+                       <span style="color: red">{{ errors[0] }}</span>
+                   </b-form-group>
+                    </ValidationProvider>
+                 </b-col>
+               </b-row>
 
-                <b-col md="6">
-                <b-form-group id="input-group-2" label="آدرس اینترنتی" label-for="input-2">
-                <b-form-input
-                 v-model="product.url"
-                 required
-                 placeholder="لطفا آدرس اینترنتی نرم افزار را وارد کنید">
-                 </b-form-input>
-                 </b-form-group>
-               
-                <b-form-group  label="عمومی" >
-                <b-radio-group
-                 v-model="product.public"
-                 :options="public"
-                  class="mb-3"
-                  value-field="item"
-                  text-field="name"
-                  disabled-field="notEnabled">
-                  </b-radio-group>
-                  </b-form-group>
-                  
-             
-                 <b-form-group  label="وضعیت" >
-                 <b-radio-group
-                  v-model="product.status"
-                  :options="status"
-                  class="mb-3"
-                  value-field="item"
-                  text-field="name"
-                  disabled-field="notEnabled">
-                  </b-radio-group>
-                  </b-form-group>
-                </b-col>
-             </b-row>
-      <b-button type="submit" variant="primary">ثبت</b-button>
-      <b-button type="reset" variant="danger">لغو</b-button>
-    </b-form> 
-   </div>        
+
+                 <b-row>
+                   <b-col md="6"> 
+                    <label for="datepicker-full-width">انتخاب یک تاریخ</label>
+                    <b-form-datepicker
+                      id="datepicker-full-width"
+                      locale="fa" 
+                      v-model="formData.date"
+                      menu-class="w-100"
+                      calendar-width="100%"
+                      class="mb-2"
+                      placeholder="تاریخ نتخاب نشده"
+                      >
+                    </b-form-datepicker>
+                    </b-col>
+
+                     <b-col md="6">
+                       <ValidationProvider name="URL" rules="required|email" v-slot="{ errors }"> 
+                       <b-form-group label="آدرس اینترنتی" label-for="URL">
+                       <b-form-input type="text" v-model="formData.url" id="URL"></b-form-input>
+                       <span style="color: red">{{ errors[0] }}</span>
+                        </b-form-group>
+                       </ValidationProvider>
+                     </b-col>
+                   </b-row>
+
+                       
+                      <b-form-group label="عمومی">
+                       <b-radio-group
+                        v-model="formData.public"
+                        :options="public"
+                        value-field="value"
+                        text-field="label"
+                        disabled-field="notEnabled">
+                        </b-radio-group>
+                       </b-form-group>
+
+
+
+                       <b-form-group label="وضعیت">
+                       <b-radio-group
+                        v-model="formData.status"
+                        :options="status"
+                        value-field="value"
+                        text-field="label"
+                        disabled-field="notEnabled">
+                        </b-radio-group>
+                       </b-form-group>
+                    
+                   
+
+
+
+                   <div>
+                       <b-button type="reset" variant="danger" @click="onCancel">لغو</b-button>
+                       <b-button type="submit" variant="primary">ثبت</b-button>                 
+                   </div>
+
+
+
+                </b-form>
+                </ValidationObserver>
+           </div>        
   </b-container>
 </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from "vuex";
+
 export default {
-  data() {
-    return {
+
+  data: () => ({
+      formData: {
+          id: '',
+          name: '',
+          title: '',
+          date: '',
+          url: '',
+          public: '',
+          status: ''
+      } ,
       public: [
-        { item: true, name: "بله" },
-        { item: false, name: "خیر" },
+        { value: true, label: "بله" },
+        { value: false, label: "خیر" },
       ],
-
       status: [
-        { item: true, name: "فعال" },
-        { item: false, name: "غیرفعال" },
+        { value: true, label: "فعال" },
+        { value: false, label: "غیرفعال" },
       ],
-      product: {
-        id: "",
-      },
-      show: true,
-    };
-  },
+  }),
   methods: {
-    onSubmit(evt) {
-      evt.preventDefault();
-      // alert(JSON.stringify())
-      this.product.id = Math.random().toString(36).substr(2, 9);
-      this.$store.commit("product/ADD_ITEM", this.product);
-      this.product = [];
-      this.$router.push("/");
-    },
-    onReset(evt) {
-      this.$router.push("/");
-      evt.preventDefault();
+    onSubmit() {
 
-      // Reset our form values
-      this.product.name = "";
-      this.product.title = "";
-      this.product.date = "";
-      this.product.url = "";
-      this.product.public = "";
-      this.product.status = "";
-
-      // Trick to reset/clear native browser form validation state
-      this.$nextTick(() => {});
+        this.$router.push("/"); 
+        this.formData.id = Math.random().toString(36).substr(2, 9);
+        this.$store.commit("product/ADD_ITEM", this.formData);
+        this.formData = [];   
     },
+     onCancel() {
+      this.$router.push("/");
+      this.formData = []; 
+     }
   },
 };
 </script>

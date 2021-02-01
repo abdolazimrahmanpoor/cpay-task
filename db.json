@@ -10,5 +10,55 @@
   ],
   "profile": {
     "name": "typicode"
-  }
+  },
+  "addresses": [
+    {
+      "id": 1,
+      "country": "ایران",
+      "province": "استان تهران",
+      "city": "تهران",
+      "address": "بزرگراه اشرفی اصفهانی، نرسیده به میدان پونک، کوچه طباطبایی، ساختمان رویال، طبقه 6، واحد 21",
+      "longtitude": 132.25,
+      "latitude": -125.13,
+      "active": true,
+      "personId": null,
+      "datetime": {
+        "created_at": "2021-01-26T11:29:35.383Z",
+        "updated_at": "2021-01-26T11:29:35.383Z",
+        "deleted_at": null
+      }
+    },
+    {
+      "id": 3,
+      "country": "ایران",
+      "province": "استان هرمزگان",
+      "city": "کیش",
+      "address": "میدان امیرکبیر، بلوارخلیج فارس",
+      "longtitude": 126.25,
+      "latitude": -112.43,
+      "active": true,
+      "personId": null,
+      "datetime": {
+        "created_at": "2021-01-27T13:28:10.214Z",
+        "updated_at": "2021-01-27T13:29:12.873Z",
+        "deleted_at": null
+      }
+    },
+    {
+      "id": 4,
+      "country": "ایران",
+      "province": "استان اصفهان",
+      "city": "اصفهان",
+      "address": " میدان آزادی، خیابان دانشگاه، دانشگاه اصفهان، ساختمان کتابخانه مرکزی، طبقه سوم",
+      "longtitude": 126.25,
+      "latitude": -112.43,
+      "active": true,
+      "personId": null,
+      "datetime": {
+        "created_at": "2021-01-28T10:54:43.644Z",
+        "updated_at": "2021-01-28T10:56:06.647Z",
+        "deleted_at": null
+      }
+    }
+  ]
 }
